@@ -1,0 +1,21 @@
+[project]
+name = "mailguardian"
+version = "0.1.0"
+description = "Agent-native CLI suite for email triage and calendar management"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.15",
+    "imapclient>=3.0",
+    "google-api-python-client>=2.150",
+    "google-auth-oauthlib>=1.2",
+    "litellm>=1.50",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+mg = "mailguardian.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
