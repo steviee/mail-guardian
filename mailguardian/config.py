@@ -8,8 +8,10 @@ CONFIG_DIR = Path.home() / ".config" / "mailguardian"
 ACCOUNTS_FILE = CONFIG_DIR / "accounts.yaml"
 SETTINGS_FILE = CONFIG_DIR / "settings.yaml"
 
+DEFAULT_LLM_MODEL = "ollama_chat/llama3.2"
+
 DEFAULT_SETTINGS = {
-    "llm_model": "gpt-4o-mini",
+    "llm_model": DEFAULT_LLM_MODEL,
     "check_interval": 300,
 }
 

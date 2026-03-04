@@ -7,6 +7,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
+from mailguardian.config import DEFAULT_LLM_MODEL
+
 app = typer.Typer(help="Calendar operations")
 console = Console()
 
@@ -74,7 +76,7 @@ def view(
 @app.command()
 def add(
     text: str = typer.Argument(..., help="Event description in natural language"),
-    model: str = typer.Option("gpt-4o-mini", help="LLM model for parsing"),
+    model: str = typer.Option(DEFAULT_LLM_MODEL, help="LLM model for parsing"),
 ) -> None:
     """Add a calendar event using natural language (AI-powered)."""
     import json

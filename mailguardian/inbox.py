@@ -8,6 +8,7 @@ from rich.panel import Panel
 from rich.table import Table
 
 from mailguardian.accounts import get_account, get_password
+from mailguardian.config import DEFAULT_LLM_MODEL
 from mailguardian.imap_client import connect, fetch_mail_detail, fetch_mail_list
 
 app = typer.Typer(help="Inbox operations")
@@ -104,7 +105,7 @@ def show(
 def scan(
     limit: int = typer.Option(10, help="Number of mails to scan"),
     ai: bool = typer.Option(False, "--ai", help="Use AI classification"),
-    model: str = typer.Option("gpt-4o-mini", help="LLM model for AI classification"),
+    model: str = typer.Option(DEFAULT_LLM_MODEL, help="LLM model for AI classification"),
     account: Optional[str] = typer.Option(None, help="Account name to use"),
     folder: str = typer.Option("INBOX", help="Mail folder"),
 ) -> None:
@@ -172,7 +173,7 @@ def scan(
 @app.command()
 def summarize(
     mail_uid: int = typer.Argument(..., help="Mail UID to summarize"),
-    model: str = typer.Option("gpt-4o-mini", help="LLM model to use"),
+    model: str = typer.Option(DEFAULT_LLM_MODEL, help="LLM model to use"),
     account: Optional[str] = typer.Option(None, help="Account name to use"),
     folder: str = typer.Option("INBOX", help="Mail folder"),
 ) -> None:

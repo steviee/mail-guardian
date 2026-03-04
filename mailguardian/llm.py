@@ -6,8 +6,10 @@ import json
 
 import litellm
 
+from mailguardian.config import DEFAULT_LLM_MODEL
 
-def summarize_mail(subject: str, body: str, model: str = "gpt-4o-mini") -> str:
+
+def summarize_mail(subject: str, body: str, model: str = DEFAULT_LLM_MODEL) -> str:
     """Generate a concise summary of an email."""
     response = litellm.completion(
         model=model,
@@ -29,7 +31,7 @@ def summarize_mail(subject: str, body: str, model: str = "gpt-4o-mini") -> str:
     return response.choices[0].message.content.strip()
 
 
-def classify_mail(subject: str, body: str, model: str = "gpt-4o-mini") -> dict:
+def classify_mail(subject: str, body: str, model: str = DEFAULT_LLM_MODEL) -> dict:
     """Classify an email into categories.
 
     Returns dict with keys: category, priority, action_required.
@@ -77,7 +79,7 @@ def classify_mail(subject: str, body: str, model: str = "gpt-4o-mini") -> dict:
 
 def classify_batch(
     mails: list[dict],
-    model: str = "gpt-4o-mini",
+    model: str = DEFAULT_LLM_MODEL,
 ) -> list[dict]:
     """Classify multiple mails. Each mail dict needs 'subject' and 'body' keys."""
     results = []

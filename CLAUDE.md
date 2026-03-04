@@ -22,9 +22,16 @@ MailGuardian is an agent-native CLI suite for email triage and calendar manageme
 - Multi-account IMAP support (Gmail, Outlook, generic IMAP servers)
 - `calendar_.py` has trailing underscore to avoid stdlib collision
 
+## LLM
+- Primary backend: **Ollama** (local, via OpenAI-compatible API)
+- Default model: `ollama_chat/llama3.2` (configurable in `~/.config/mailguardian/settings.yaml`)
+- LiteLLM handles provider abstraction — any LiteLLM-compatible model works
+- Central default: `mailguardian/config.py:DEFAULT_LLM_MODEL`
+
 ## Key Dependencies
 - typer (CLI framework)
 - imapclient (IMAP)
 - google-api-python-client + google-auth-oauthlib (Calendar)
-- litellm (LLM integration)
+- litellm (LLM integration, provider-agnostic)
 - rich (terminal output)
+- keyring (secure password storage)

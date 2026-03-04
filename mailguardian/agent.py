@@ -12,7 +12,7 @@ from rich.console import Console
 from rich.table import Table
 
 from mailguardian.accounts import get_account, get_password, list_accounts
-from mailguardian.config import load_settings
+from mailguardian.config import DEFAULT_LLM_MODEL, load_settings
 from mailguardian.imap_client import connect, fetch_mail_detail, fetch_mail_list
 from mailguardian.llm import classify_mail
 from mailguardian.playbooks import Playbook, create_default_playbooks, load_playbooks
@@ -121,7 +121,7 @@ def run(
     global _running
 
     settings = load_settings()
-    model = model or settings.get("llm_model", "gpt-4o-mini")
+    model = model or settings.get("llm_model", DEFAULT_LLM_MODEL)
     interval = interval or settings.get("check_interval", 300)
 
     # Ensure playbooks exist
@@ -194,7 +194,7 @@ def status() -> None:
     console.print("[bold]MailGuardian Agent Status[/bold]\n")
     console.print(f"  Accounts:  {len(accounts)} configured")
     console.print(f"  Playbooks: {len(playbooks)} loaded")
-    console.print(f"  LLM Model: {settings.get('llm_model', 'gpt-4o-mini')}")
+    console.print(f"  LLM Model: {settings.get('llm_model', DEFAULT_LLM_MODEL)}")
     console.print(f"  Interval:  {settings.get('check_interval', 300)}s")
 
     if not accounts:
